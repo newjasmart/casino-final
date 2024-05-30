@@ -17,10 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLDatabase {
-    
-    public static void main(String[] args){
-        new connect();
-    }
    Connection SQLConexion;
     
     private Connection connect() {
