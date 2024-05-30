@@ -17,18 +17,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLDatabase {
+    
+    public static void main(String[] args){
+        new connect();
+    }
+   Connection SQLConexion;
+    
     private Connection connect() {
         // URL de la base de dades MySQL
+        String host = "localhost";
+        String puerto = "3306";
+        String nameDB = "casino";
+        String driver = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/casino";
         String user = "root";
         String password = "";
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
+            Class.forName(driver);
+            SQLConexion = DriverManager.getConnection(url, user, password);
+            System.out.println("Connectat");
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return conn;
+        return SQLConexion;
     }
 
     public void inserirClient(Client client) {
