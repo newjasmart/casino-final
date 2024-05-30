@@ -1,42 +1,67 @@
 package cat.boscdelacoma.casinoreptefinal;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CasinoApp extends Application {
-    private MySQLDatabase mySQLDatabase = new MySQLDatabase();
+
+    static void setRoot(String secondary) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    private MySQLDatabase mySQLDatabase;
 
     @Override
     public void start(Stage primaryStage) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Selecciona la base de dades:");
+        System.out.println("1. MySQL");
+        System.out.println("2. ObjectDB");
+        int eleccio = scanner.nextInt();
+
+        if (eleccio == 1) {
+            mySQLDatabase = new MySQLDatabase();
+        } else if (eleccio == 2) {
+            // ObjectDBDatabase db = new ObjectDBDatabase();
+            // Treballar amb ObjectDB
+            System.out.println("No s'ha implementat la base de dades ObjectDB");
+            return;
+        } else {
+            System.out.println("Elecció no vàlida");
+            return;
+        }
+
         primaryStage.setTitle("Gestió del Casino");
 
         Label label = new Label("Gestió del Casino");
         ListView<String> listViewClients = new ListView<>();
         ListView<String> listViewJocs = new ListView<>();
-        
+
         TextField txtNomClient = new TextField();
         TextField txtDniClient = new TextField();
         TextField txtPuntsFidelitat = new TextField();
-        
+
         TextField txtNomJoc = new TextField();
         TextField txtTipusJoc = new TextField();
-        
+
         Button btnAfegirClient = new Button("Afegir Client");
         Button btnAfegirJoc = new Button("Afegir Joc");
-        
+
         Button btnLoadClients = new Button("Carregar Clients");
         Button btnLoadJocs = new Button("Carregar Jocs");
-        
+
         Button btnActualitzarClient = new Button("Actualitzar Client");
         Button btnActualitzarJoc = new Button("Actualitzar Joc");
-        
+
         Button btnEliminarClient = new Button("Eliminar Client");
         Button btnEliminarJoc = new Button("Eliminar Joc");
-
 
         // Event handlers per afegir clients i jocs
         btnAfegirClient.setOnAction(e -> {
@@ -72,11 +97,11 @@ public class CasinoApp extends Application {
                 listViewJocs.getItems().add(joc.getNom() + " - " + joc.getTipus());
             }
         });
-        
+
         // Event handlers per actualitzar clients i jocs
         btnActualitzarClient.setOnAction(e -> {
             String selectedItem = listViewClients.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
+            if (selectedItem!= null) {
                 // Aquí pots implementar la lògica per mostrar una finestra de diàleg per a l'actualització del client seleccionat
             } else {
                 // Mostra un missatge d'error si no s'ha seleccionat cap client
@@ -90,7 +115,7 @@ public class CasinoApp extends Application {
 
         btnEliminarClient.setOnAction(e -> {
             String selectedItem = listViewClients.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
+            if (selectedItem!= null) {
                 // Aquí pots implementar la lògica per eliminar el client seleccionat
                 String dni = selectedItem.split(" - ")[1];
                 mySQLDatabase.eliminarClient(dni);
@@ -107,7 +132,7 @@ public class CasinoApp extends Application {
 
         btnActualitzarJoc.setOnAction(e -> {
             String selectedItem = listViewJocs.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
+            if (selectedItem!= null) {
                 // Aquí pots implementar la lògica per mostrar una finestra de diàleg per a l'actualització del joc seleccionat
             } else {
                 // Mostra un missatge d'error si no s'ha seleccionat cap joc
@@ -121,7 +146,7 @@ public class CasinoApp extends Application {
 
         btnEliminarJoc.setOnAction(e -> {
             String selectedItem = listViewJocs.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
+            if (selectedItem!= null) {
                 // Aquí pots implementar la lògica per eliminar el joc seleccionat
                 String nomJoc = selectedItem.split(" - ")[0];
                 mySQLDatabase.eliminarJoc(nomJoc);
@@ -135,7 +160,6 @@ public class CasinoApp extends Application {
                 alert.showAndWait();
             }
         });
-
 
         VBox vbox = new VBox(
             label,
