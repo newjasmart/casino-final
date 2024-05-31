@@ -10,6 +10,11 @@ package cat.boscdelacoma.casinoreptefinal;
  */
 public class Client extends Persona {
     private int puntsFidelitat;
+    
+    public Client() {
+        super("Nom", "DNI"); // set default values for nom and dni
+        this.puntsFidelitat = 0; // set default value for puntsFidelitat
+    }
 
     public Client(String nom, String dni, int puntsFidelitat) {
         super(nom, dni);
