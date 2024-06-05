@@ -1,12 +1,14 @@
 package cat.boscdelacoma.casinoreptefinal;
 
+import cat.boscdelacoma.casinoreptefinal.Classes.Client;
+import cat.boscdelacoma.casinoreptefinal.Classes.Empleat;
+import cat.boscdelacoma.casinoreptefinal.Classes.Joc;
+import cat.boscdelacoma.casinoreptefinal.Classes.Persona;
 import java.io.IOException;
 import java.net.URL;
-import static java.util.Collections.list;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;

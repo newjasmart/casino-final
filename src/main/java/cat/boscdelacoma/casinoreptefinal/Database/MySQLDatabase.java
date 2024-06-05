@@ -1,13 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package cat.boscdelacoma.casinoreptefinal;
+package cat.boscdelacoma.casinoreptefinal.Database;
 
 /**
  *
  * @author TimOliver
  */
+import cat.boscdelacoma.casinoreptefinal.Classes.Client;
+import cat.boscdelacoma.casinoreptefinal.Classes.Joc;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,28 +17,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class MySQLDatabase {
-   Connection SQLConexion;
     
-    private Connection connect() {
-        // URL de la base de dades MySQL
-        String host = "localhost";
-        String puerto = "3306";
-        String nameDB = "casino";
-        String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/casino";
-        String user = "root";
-        String password = "";
-        Connection conn = null;
+    private static final Properties prop = loadConfig();
+    
+    public static Connection getConnection() throws SQLException {
         try {
-            Class.forName(driver);
-            SQLConexion = DriverManager.getConnection(url, user, password);
-            System.out.println("Connectat");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Load the MySQL JDBC driver
+            
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        return SQLConexion;
+        return DriverManager.getConnection(prop.getProperty("db.url"), prop.getProperty("db.user"), prop.getProperty("db.password"));
+    }
+    
+    static Properties loadConfig() {
+        Properties prop = new Properties();
+        try (DataInputStream input = new DataInputStream(new FileInputStream("config.properties"))) {
+            prop.load(input);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Config file not found: " + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("Error reading config file: " + ex.getMessage());
+        }
+        return prop;
     }
 
     public void inserirClient(Client client) {
@@ -116,7 +122,6 @@ public class MySQLDatabase {
             System.out.println(e.getMessage());
         }
     }
-
 
     public List<Joc> obtenirJocs() {
         List<Joc> jocs = new ArrayList<>();

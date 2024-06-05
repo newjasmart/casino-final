@@ -1,33 +1,34 @@
 package cat.boscdelacoma.casinoreptefinal;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CasinoApp extends Application {
 
-    static void setRoot(String secondary) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    private MySQLDatabase mySQLDatabase;
+    private static Scene scene;
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CasinoApp.class.getResource("primary.fxml"));
-   
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage stage) throws IOException {
+        scene = new Scene(loadFXML("/cat/boscdelacoma/casinoreptefinal/primary.fxml"), 640, 480);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(CasinoApp.class.getResource(fxml));
+        return fxmlLoader.load();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 }

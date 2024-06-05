@@ -1,4 +1,4 @@
-package cat.boscdelacoma.casinoreptefinal;
+package cat.boscdelacoma.casinoreptefinal.Classes;
 
 /**
  *
