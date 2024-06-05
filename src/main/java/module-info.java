@@ -7,3 +7,4 @@ module cat.boscdelacoma.casinoreptefinal {
     opens cat.boscdelacoma.casinoreptefinal to javafx.fxml;
     exports cat.boscdelacoma.casinoreptefinal;
 }
+

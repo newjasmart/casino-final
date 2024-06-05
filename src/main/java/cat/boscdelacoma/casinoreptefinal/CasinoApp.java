@@ -19,12 +19,14 @@ public class CasinoApp extends Application {
     private MySQLDatabase mySQLDatabase;
 
     @Override
-    public void start(Stage primaryStage) {
-        Scanner scanner = new Scanner(System.in);
+    public void start(Stage primaryStage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(CasinoApp.class.getResource("primary.fxml"));
+    /*    
+       Scanner scanner = new Scanner(System.in);
         System.out.println("Selecciona la base de dades:");
         System.out.println("1. MySQL");
         System.out.println("2. ObjectDB");
-        int eleccio = scanner.nextInt();
+          int eleccio = scanner.nextInt();
 
         if (eleccio == 1) {
             mySQLDatabase = new MySQLDatabase();
@@ -186,8 +188,8 @@ public class CasinoApp extends Application {
             btnEliminarJoc,
             btnLoadJocs
         );
-
-        Scene scene = new Scene(vbox, 800, 600);
+*/
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

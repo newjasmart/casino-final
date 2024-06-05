@@ -9,9 +9,14 @@ package cat.boscdelacoma.casinoreptefinal;
  * @author TimOliver
  */
 public class Empleat extends Persona {
-    private String posicio;
+    private int posicio;
+    
+    public Empleat() {
+        super("", ""); // Crida al constructor de la classe Persona amb valors per defecte
+        this.posicio = 0; // Valor per defecte per a la posició
+    }
 
-    public Empleat(String nom, String dni, String posicio) {
+    public Empleat(String nom, String dni, int posicio) {
         super(nom, dni);
         this.posicio = posicio;
     }
@@ -23,6 +28,6 @@ public class Empleat extends Persona {
     }
 
     // Getters i Setters
-    public String getPosicio() { return posicio; }
-    public void setPosicio(String posicio) { this.posicio = posicio; }
+    public int getPosicio() { return posicio; }
+    public void setPosicio(int posicio) { this.posicio = posicio; }
 }

@@ -5,12 +5,15 @@ package cat.boscdelacoma.casinoreptefinal;
  * @author TimOliver
  */
 public abstract class Persona {
-    private String nom;
+    String nom;
     private String dni;
+   
     
     public Persona(String nom, String dni) {
         this.nom = nom;
         this.dni = dni;
+        
+        
     }
     
     public String getNom() { return nom; }

@@ -55,7 +55,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>cat.boscdelacoma.casinoreptefinal.MySQLDatabase</mainClass>
+                    <mainClass>cat.boscdelacoma.casinoreptefinal.CasinoApp</mainClass>
                 </configuration>
                 <executions>
                     <execution>
